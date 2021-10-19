@@ -1,197 +1,123 @@
-
-
-//MILLESTONE 1
+$(document).ready(function(){
 /*
-DEFINIRE UN ARRAI DI OGGETTI:OGNI OGGETTO RAPPRESENTERA' UN ICONA 
-CARATTERIZZATA DA:NOME PREFISSO CATEGORIA FAMIGLIA.
-
-UTILIZZANDO LA FUNZIONE FOREACH E IL TEMPLATELITERAL VISUALIZZARE LE ICONE IN PAGINA CON TANTO DI NOME
+MILLESTONE 1 : CREA UN ARRAY DI OGGETTI CHE RAPPRESENTANO ICONE E SARANNO COPOSTI DA 
+FAMILY FAS PREFIX FA- NOME CAT E DALLA TIPOLOGIA DI ICONA !! 
+TRAMITE UN CICLO FOREACH E TEMPLATE LITTERAL STAMPARE A SCHERMO LE ICONE
 */
-// creo il mio array di oggetti icone 
-const icons = [
-    {
-        nome:'cat',
-        prefix:'fa-',
-        family:'fas',
-        type:'animal'
-    },{
-        nome:'crow',
-        prefix:'fa-',
-        family:'fas',
-        type:'animal'
-    },{
-        nome:'dog',
-        prefix:'fa-',
-        family:'fas',
-        type:'animal'
-    }, {
-        nome:'dragon',
-        prefix:'fa-',
-        family:'fas',
-        type:'animal'
-    },{
-        nome:'memory',
-        prefix:'fa-',
-        family:'fas',
-        type:'tech'
-    },{
-        nome:'server',
-        prefix:'fa-',
-        family:'fas',
-        type:'tech'
-    },{
-        nome:'laptop-code',
-        prefix:'fa-',
-        family:'fas',
-        type:'tech'
-    },{
-        nome:'headphones',
-        prefix:'fa-',
-        family:'fas',
-        type:'tech'
-    },{
-        nome:'carrot',
-        prefix:'fa-',
-        family:'fas',
-        type:'vegetable'
-    },{
-        nome:'apple-alt',
-        prefix:'fa-',
-        family:'fas',
-        type:'vegetable'
-    },{
-        nome:'lemon',
-        prefix:'fa-',
-        family:'fas',
-        type:'vegetable'
-    },{
-        nome:'pepper-hot',
-        prefix:'fa-',
-        family:'fas',
-        type:'vegetable'
-    },{
-        nome:'user-astronaut',
-        prefix:'fa-',
-        family:'fas',
-        type:'user'
-    },{
-        nome:'user-graduate',
-        prefix:'fa-',
-        family:'fas',
-        type:'user'
-    }, {
-        nome:'user-ninja',
-        prefix:'fa-',
-        family:'fas',
-        type:'user'
-    }, {
-        nome:'user-secret',
-        prefix:'fa-',
-        family:'fas',
-        type:'user'
-    },
-    
-];
+//creo un array di oggetti icone e lo salvo in una variabile di nome icons
+    const icons =[
+        {family:'fas',prefix:'fa-',nome:'dog',type:'animal'},
+        {family:'fas',prefix:'fa-',nome:'cat',type:'animal'},
+        {family:'fas',prefix:'fa-',nome:'hippo',type:'animal'},
+        {family:'fas',prefix:'fa-',nome:'dragon',type:'animal'},
+        {family:'fas',prefix:'fa-',nome:'server',type:'tech'},
+        {family:'fas',prefix:'fa-',nome:'laptop',type:'tech'},
+        {family:'fas',prefix:'fa-',nome:'tablet',type:'tech'},
+        {family:'fas',prefix:'fa-',nome:'tv',type:'tech'},
+        {family:'fas',prefix:'fa-',nome:'running',type:'healt'},
+        {family:'fas',prefix:'fa-',nome:'first-aid',type:'healt'},
+        {family:'fas',prefix:'fa-',nome:'user-md',type:'healt'},
+        {family:'fas',prefix:'fa-',nome:'weight',type:'healt'},
+    ];
 
-const color = [
-'#ffff00',
-'white',
-'orange',
-'dodgerblue'
+    // creiamo il nostro array che conterranno i nostri colori per le icone
+    const color = ['orange','blue','red']
+    console.log(color);
+    const coloredArray = colorIcons(icons, color)
+    //   salvo in una costante il mio container dove saranno visibili le icone
+    const container = $('.icons')
+    console.log(container);
+   print(coloredArray, container)
 
-];
-const container = $('.icons')
-console.log(icons);
-const colorArray = colorIcons(icons, color)
-console.log(icons);
-console.log(colorArray);
-//fine del nostro array oggetti icone
+   const select = $('#type')
+   const types = getType(coloredArray)
+    printOption(types, select)
 
-// creo il mio array con i colori da associare alle icone 
-print(colorArray, container)
+    select.change({container}, function(event){
+            console.log(event);
+            const container = event.data.container
+            const optionSelected = $(this).val()
+            console.log(optionSelected);
 
-const select = $('#type')
+            const filtered = coloredArray.filter((item)=>{
 
-const types = getType(colorArray)
-printOptions(types, select)
-select.change({container},function(event){
+                return item.type === optionSelected
+            })
 
-const container = event.data.container
-const optionSelected = $(this).val()
-console.log(optionSelected);
+            if(filtered.length > 0){
+                print(filtered, container)
+            } else {
 
-const filtered = colorArray.filter((e)=>{
-
-    return e.type===optionSelected;
+                print(coloredArray, container)
+            }
+            
+    });
+ 
 })
 
-if(filtered.length >0){
-    print(filtered, container)
-} else {
+// creo una funzione che chiamero' print  essa mi servirà per stampare a schermo le mie icone
 
-    print(colorArray, container)
-}
-})
+function print (array, container) {
 
+    container.html('')
+    array.forEach((item) => {
+        const {color, family, prefix, nome}= item
 
-
-print(icons,container)
-
-function print(icons, container){
-  container.html('')
-
-  icons.forEach(element => {
-    const{nome,color,prefix,family}=element
-
-    const iconHTML = `
-     <div class="icon">
-     <i class='${family} ${prefix}${nome}'style='color:${color}'></i>
-      <div class'title'><h5 style='color:${color};'>${nome.toUpperCase()}'</h5></div>
-     </div>
-    
-    `;
-    container.append(iconHTML)
-});
-
+        const elementHTML = `
+            <div class="icon">
+                <i class="${family} ${prefix}${nome} icona"style="color:${color}"></i>
+                 <span style="color:${color}">${nome}</span>
+            </div>
+        `
+        container.append(elementHTML)
+    });
 }
 
+
+// creo una funzione che faccia un bind tra icona.tipo e colore
 function colorIcons(icons, color){
-   const types = getType(icons)
-    const colorArray = icons.map((item)=>{
+    const types = getType(icons)
+    const coloredArray = icons.map((item)=>{
       
-         const indexType = types.indexOf(item.type)
-          if(indexType != -1){
-               item.color = color[indexType]
-          }
-       return item
+
+        const indexType = types.indexOf(item.type)
+            item.color = color[indexType]
+          
+            return item
     })
-    return colorArray
-};
 
 
-function getType (array){
+    return coloredArray
+}
 
-    const types = []
-    array.forEach(item => {
+
+
+
+
+// creo una funzione che estrapoli i tipi delle mie icone e li inserisca in un array
+function getType(array){
+   const types = []
+//    array che ocnterrà i nostri tipi di icone all' interno della funzione
+
+    array.forEach((item) => {
+        
         if(!types.includes(item.type)){
+
             types.push(item.type)
         }
+       
     });
-  return types
+     
+    return types
+
+    
 }
 
+function printOption (array, select){
 
-function printOptions (array, select) {
-     array.forEach((e) => {
-         
-        select.append(`
-        <option value="${e}">${e}</option>
-        `)
-     });
+    array.forEach((item) => {
+        
+        select.append(`<option style="font-size:1vw" value="${item}">${item.toUpperCase()}</option>`)
+
+    });
 }
-
-
-
-
-
-

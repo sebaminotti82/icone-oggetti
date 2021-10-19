@@ -4,58 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="font/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
      <link rel="stylesheet" href="style.css">
 
-     <style>
-         body{
-             background-color:cornflowerblue; ;
-         }
-         *{margin: 0; padding: 0; box-sizing: border-box;}
-          .container{width: 100%; height:80vh;background-color: cornflowerblue;}
-            header{width: 80%; height: 10vh; background-color: rgb(25, 101, 241);margin-left: 10%;}
-             .icons {width: 80%;margin-left: 10%;margin-top: 5vh;}
-                .icon{height: 90px ; width: calc(100% / 4 - 2vw);box-shadow: 0px 0px 2px 2px whitesmoke; float: left;margin-left: 1.5vw;
-                      margin-top: 3vh;background-color:rgba(0, 0, 0, 0.4);border-radius: 1vw;}
-                  .icon i{font-size: 2vw;margin-left: 45%;margin-top: 10px;}
-                   .icon h5 {text-align: center;font-size: 1.5vw;font-family: 'Rubik', sans-serif;margin-top: 5px;}
-                     label{margin-left: 30vw; font-family: 'Rubik', sans-serif;width: 25vw;border-bottom: 3px solid rgb(0, 255, 213);
-                           color: wheat;}
-                      select{margin-left: 1vw;font-family: 'Rubik', sans-serif; outline: none; border-radius: 0.4vw;width: 10vw ;
-                             color: orange;margin-top: 1vh;
-                    }
 
-     </style>
     <title>Document</title>
 </head>
 <body>
-  <div class="container">
-         <header>
-                <div class="search">
-                    <label for="type">Filtra per tipo</label>
-                    <select name="type" id="type">
-                        <option value="">All Icons</option>
-                    </select>
-                
+    <!-- container che racchiude l'intera pagina web -->
+    <div class="container">
+        <!-- parte di header della pagina -->
+        <header style="width: 100%;height: 10vh; position: fixed;top: 0;z-index: 1000; background-color: dodgerblue;">
+            <div class="logo" style="width: 20%;height: 10vh; border-right: 5px solid white; float: left;">
+                <h1 style="text-align: center; line-height: 10vh; font-size: 2vw; letter-spacing: 0.5vw; color: white;">ICONS-LIST</h1>
+            </div>
+
+            <div class="search" style="width:80%;height:10vh ;">
+             <label for="type"><span style="font-size: 1.5vw;color: white; line-height: 10vh;margin-left: 2vw;">FILTRA PER CATEGORIA ICONE</span></label>
+             <select style="margin-left: 10vw;outline: none; border: 1px solid white;color: dodgerblue; width: 10vw; height: 4vh;" name="type" id="type">
+                 <option style="font-size: 1vw;" value="">TUTTE LE ICONE</option>
+             </select>
+            </div>
+        </header>
+
+
+        <!-- fine header della pagina -->
+
+        <!-- parte di main della pagina -->
+        <main style="width: 100%;height: 80vh;margin-top: 10vh;background-color: rgb(34, 156, 178);">
+            
+                <div class="my-icons">
+                        <div class="icons">
+                            
+                        </div>
                 </div>
-                
-         </header>
 
+        </main>
+        <!-- fine main della pagina (corpo) -->
+
+        <!-- parte di footer della pagina -->
+        <footer style="width: 100%;height: 10vh;background-color: dodgerblue;">
+
+        </footer>
+
+        <!-- fine footer della pagina -->
+    </div>
+    <!-- fine container -->
     
-        <div class="icons">
-
-        </div>
-        <script src="main.js"></script>
-  </div>
-    
-
-
-
-
+    <script src="main.js"></script>
 </body>
 </html>
